@@ -1,7 +1,9 @@
 public import Subtraction
 
 /// The identity and fixed-width integer kernel for backward movement by a count.
-public enum Retreat {
+public enum Retreat {}
+
+extension Retreat {
 
     @inlinable
     public static func reporting<Value: FixedWidthInteger>(

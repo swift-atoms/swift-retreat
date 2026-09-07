@@ -9,6 +9,9 @@ let package = Package(
     ],
     products: [
         .library(name: "Retreat", targets: ["Retreat"]),
+        .library(name: "Retreat Standard Library Integration", targets: ["Retreat Standard Library Integration"]),
+        .library(name: "Retreat Foundation Library Integration", targets: ["Retreat Foundation Library Integration"]),
+        .library(name: "Retreat Test Support", targets: ["Retreat Test Support"]),
     ],
     dependencies: [
         .package(
@@ -21,21 +24,48 @@ let package = Package(
             name: "Retreat",
             dependencies: [
                 .product(name: "Subtraction", package: "swift-subtraction"),
-            ]
+            ],
+            path: "Sources/Retreat"
+        ),
+        .target(
+            name: "Retreat Standard Library Integration",
+            dependencies: [
+                .target(name: "Retreat"),
+            ],
+            path: "Sources/Retreat Standard Library Integration"
+        ),
+        .target(
+            name: "Retreat Foundation Library Integration",
+            dependencies: [
+                .target(name: "Retreat"),
+                .target(name: "Retreat Standard Library Integration"),
+            ],
+            path: "Sources/Retreat Foundation Library Integration"
+        ),
+        .target(
+            name: "Retreat Test Support",
+            dependencies: [
+                .target(name: "Retreat"),
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "Retreat Tests",
             dependencies: [
                 .target(name: "Retreat"),
                 .product(name: "Subtraction", package: "swift-subtraction"),
-            ]
+                .target(name: "Retreat Test Support"),
+                .target(name: "Retreat Standard Library Integration"),
+                .target(name: "Retreat Foundation Library Integration"),
+            ],
+            path: "Tests/Retreat Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    target.swiftSettings = (target.swiftSettings ?? []) + [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),

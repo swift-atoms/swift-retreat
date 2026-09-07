@@ -3,10 +3,10 @@ import Retreat
 import Testing
 
 @Suite
-struct `Retreat Tests` {
+struct `Retreat checks and saturates backward movement by a count` {
 
     @Test
-    func `reports and throws underflow as subtraction overflow`() {
+    func `Retreat reports and throws underflow as subtraction overflow`() {
         let report = Retreat.reporting(UInt(2), by: 3)
         #expect(report.value == UInt.max)
         #expect(report.overflow)
@@ -16,7 +16,7 @@ struct `Retreat Tests` {
     }
 
     @Test
-    func `exact and saturating retreat by a count`() throws {
+    func `Exact and saturating retreat operations move backward by a count`() throws {
         #expect(try Retreat.exact(UInt(7), by: 3) == 4)
         #expect(Retreat.saturating(UInt(2), by: 3) == .zero)
     }

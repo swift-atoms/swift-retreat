@@ -9,8 +9,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Retreat", targets: ["Retreat"]),
-        .library(name: "Retreat Standard Library Integration", targets: ["Retreat Standard Library Integration"]),
-        .library(name: "Retreat Foundation Library Integration", targets: ["Retreat Foundation Library Integration"]),
+
+        .library(name: "Retreat Foundation Integration", targets: ["Retreat Foundation Integration"]),
         .library(name: "Retreat Test Support", targets: ["Retreat Test Support"]),
     ],
     dependencies: [
@@ -27,20 +27,13 @@ let package = Package(
             ],
             path: "Sources/Retreat"
         ),
+        
         .target(
-            name: "Retreat Standard Library Integration",
+            name: "Retreat Foundation Integration",
             dependencies: [
                 .target(name: "Retreat"),
             ],
-            path: "Sources/Retreat Standard Library Integration"
-        ),
-        .target(
-            name: "Retreat Foundation Library Integration",
-            dependencies: [
-                .target(name: "Retreat"),
-                .target(name: "Retreat Standard Library Integration"),
-            ],
-            path: "Sources/Retreat Foundation Library Integration"
+            path: "Sources/Retreat Foundation Integration"
         ),
         .target(
             name: "Retreat Test Support",
@@ -55,8 +48,7 @@ let package = Package(
                 .target(name: "Retreat"),
                 .product(name: "Subtraction", package: "swift-subtraction"),
                 .target(name: "Retreat Test Support"),
-                .target(name: "Retreat Standard Library Integration"),
-                .target(name: "Retreat Foundation Library Integration"),
+                .target(name: "Retreat Foundation Integration"),
             ],
             path: "Tests/Retreat Tests"
         ),

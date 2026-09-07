@@ -1,6 +1,6 @@
 public import Subtraction
 
-/// The identity and fixed-width integer kernel for backward movement by a count.
+
 public enum Retreat {}
 
 extension Retreat {

@@ -48,7 +48,6 @@ let package = Package(
                 .target(name: "Retreat"),
                 .product(name: "Subtraction", package: "swift-subtraction"),
                 .target(name: "Retreat Test Support"),
-                .target(name: "Retreat Foundation Integration"),
             ],
             path: "Tests/Retreat Tests"
         ),
@@ -56,7 +55,7 @@ let package = Package(
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin].contains(target.type) {
+for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
     target.swiftSettings = (target.swiftSettings ?? []) + [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),

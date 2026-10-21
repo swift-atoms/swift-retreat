@@ -1,5 +1,5 @@
-import Subtraction
 import Retreat
+import Subtraction
 import Testing
 
 @Suite

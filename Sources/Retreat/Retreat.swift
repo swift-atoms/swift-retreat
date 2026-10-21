@@ -1,6 +1,5 @@
 public import Subtraction
 
-
 public enum Retreat {}
 
 extension Retreat {
